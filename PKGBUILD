@@ -13,7 +13,7 @@ name=cloudcompare
 #_fragment="#branch="
 options=('!strip') # strip would also remove plugins, for some reason
 pkgname=${name}-git
-pkgver=2.13.r3.g36cc2b5c9
+pkgver=2.13.1.r65.g32a2e2435
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
@@ -37,7 +37,7 @@ sha256sums=('SKIP'
             'SKIP'
             '14096df9cf7aca3099d5df1585d1cf669544e9b10754dce3d2507100dd7034fe'
             '821ac2540e1196774e26f8033946ce7b36223dae7a2a7c78f4a901b4177f68cc'
-            'ce48e2816ebb5d388283396b12cdb94272b3fd3eb1655845eacbf226ad918969'
+            '3b5c8361cd7ceb2b1e9bebe2f1684749a2a28f8f8cfdd244cd362c6b428f7338'
             'SKIP'
             'SKIP'
             'SKIP'
