@@ -49,6 +49,8 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 
 pkgver() {
@@ -152,7 +154,6 @@ package() {
   install -D -m 644 ${name}/qCC/images/icon/cc_icon.svg "${pkgdir}"/usr/share/icons/hicolor/scalable/apps/cc_icon.svg
   install -D -m 644 ${name}/qCC/images/icon/cc_viewer_icon.svg "${pkgdir}"/usr/share/icons/hicolor/scalable/apps/cc_viewer_icon.svg
 }
-# vim:set sw=2 ts=2 et:
 
 # Generated with git_submodule_PKGBUILD_conf.sh ( https://gist.github.com/bartoszek/41a3bfb707f1b258de061f75b109042b )
 # Call prepare_submodule in prepare() function
@@ -168,6 +169,8 @@ prepare_submodule() {
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qJSonRPCPlugin.url "$srcdir/JSonRPCPlugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qCanupo/contrib/dlib.url "$srcdir/dlib"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/cc-treeiso-plugin.url "$srcdir/cc-treeiso-plugin"
+  git -C "$srcdir/cloudcompare" config submodule.libs/CCAppCommon/QDarkStyleSheet.url "$srcdir/QDarkStyleSheet"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qVoxFall.url "$srcdir/qVoxFall"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/q3DMASC.url "$srcdir/q3DMASC"
   git -C "$srcdir/libE57Format" config submodule.test/extern/googletest.url "$srcdir/googletest"
   git -C "$srcdir/cloudcompare" -c protocol.file.allow=always submodule update --init --recursive
@@ -185,4 +188,7 @@ source+=(
   "cc-treeiso-plugin::git+https://github.com/truebelief/cc-treeiso-plugin"
   "q3DMASC::git+https://github.com/dgirardeau/q3DMASC"
   "googletest::git+https://github.com/google/googletest"
+  "QDarkStyleSheet::git+https://github.com/ColinDuquesnoy/QDarkStyleSheet"
+  "qVoxFall::git+https://github.com/farmakis/qVoxFall"
 )
+# vim:set sw=2 ts=2 et:
