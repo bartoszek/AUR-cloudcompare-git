@@ -17,7 +17,7 @@ pkgver=2.13.1.r65.g32a2e2435
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
-url="http://www.danielgm.net/cc/"
+url="https://www.cloudcompare.org"
 license=('GPL2')
 depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'mpir' 'pcl' 'pdal' 'laszip' 'qt5-base' 'qt5-tools' 'qt5-svg' 'qt5-websockets' 'shapelib' 'tbb' 'opencv' 'gdal')
 #fix pcl:>vtk:>vtkm:>openmp missing deps
