@@ -49,6 +49,8 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'SKIP')
 
 pkgver() {
@@ -155,20 +157,23 @@ package() {
 # Call prepare_submodule in prepare() function
 
 prepare_submodule() {
-  git -C "$srcdir/CCCoreLib" config submodule.extern/nanoflann.url "$srcdir/nanoflann"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/IO/qE57IO/extern/libE57Format.url "$srcdir/libE57Format"
   git -C "$srcdir/cloudcompare" config submodule.extern/CCCoreLib.url "$srcdir/CCCoreLib"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qPoissonRecon/extern/PoissonRecon.url "$srcdir/PoissonRecon"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMPlane.url "$srcdir/mplane-plugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qColorimetricSegmenter.url "$srcdir/ptrans"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMasonry.url "$srcdir/masonry-cc"
-  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qJSonRPCPlugin.url "$srcdir/JSonRPCPlugin"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qJSonRPCPlugin.url "$srcdir/qJSonRPCPlugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qCanupo/contrib/dlib.url "$srcdir/dlib"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/cc-treeiso-plugin.url "$srcdir/cc-treeiso-plugin"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/q3DMASC.url "$srcdir/q3DMASC"
   git -C "$srcdir/cloudcompare" config submodule.libs/CCAppCommon/QDarkStyleSheet.url "$srcdir/QDarkStyleSheet"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qVoxFall.url "$srcdir/qVoxFall"
-  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/q3DMASC.url "$srcdir/q3DMASC"
-  git -C "$srcdir/libE57Format" config submodule.test/extern/googletest.url "$srcdir/googletest"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qG3Point.url "$srcdir/qG3Point"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/IO/qPhotoscanIO/extern/quazip.url "$srcdir/quazip"
+  git -C "$srcdir/cloudcompare" -c protocol.file.allow=always submodule update --init
+  git -C "$srcdir/cloudcompare/libs/qCC_db/extern/CCCoreLib/" config submodule.extern/nanoflann.url "$srcdir/nanoflann"
+  git -C "$srcdir/cloudcompare/plugins/core/IO/qE57IO/extern/libE57Format/test/extern/googletest" config submodule.test/extern/googletest.url "$srcdir/googletest"
   git -C "$srcdir/cloudcompare" -c protocol.file.allow=always submodule update --init --recursive
 }
 source+=(
@@ -179,12 +184,15 @@ source+=(
   "mplane-plugin::git+https://github.com/hvs-ait/mplane-plugin"
   "ptrans::git+https://gitlab.univ-nantes.fr/E164955Z/ptrans"
   "masonry-cc::git+https://github.com/CyberbuildLab/masonry-cc"
-  "JSonRPCPlugin::git+https://gitlab.com/theadib/JSonRPCPlugin"
+  "qJSonRPCPlugin::git+https://github.com/CloudCompare/qJSonRPCPlugin"
   "dlib::git+https://github.com/davisking/dlib"
   "cc-treeiso-plugin::git+https://github.com/truebelief/cc-treeiso-plugin"
   "q3DMASC::git+https://github.com/dgirardeau/q3DMASC"
-  "googletest::git+https://github.com/google/googletest"
   "QDarkStyleSheet::git+https://github.com/ColinDuquesnoy/QDarkStyleSheet"
   "qVoxFall::git+https://github.com/farmakis/qVoxFall"
+  "qG3Point::git+https://github.com/p-leroy/qG3Point"
+  "quazip::git+https://github.com/stachenov/quazip"
+  "googletest::git+https://github.com/google/googletest"
 )
+
 # vim:set sw=2 ts=2 et:
