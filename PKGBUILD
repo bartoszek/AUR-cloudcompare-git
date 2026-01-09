@@ -13,7 +13,7 @@ name=cloudcompare
 #_fragment="#branch="
 options=('!strip') # strip would also remove plugins, for some reason
 pkgname=${name}-git
-pkgver=2.13.1.r280.g8ddc7062a
+pkgver=2.13.1.r285.gbb5ef778f
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
@@ -59,6 +59,7 @@ pkgver() {
 
 prepare() {
   prepare_submodule
+ sed "/target_include_directories/a target_compile_definitions(LASzip::LASzip INTERFACE LASZIP_API_VERSION)" -i "$(find "${srcdir}/${name}" -name FindLASzip.cmake)"
 }
 
 build() {
