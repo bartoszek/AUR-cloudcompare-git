@@ -2,6 +2,7 @@
 # Maintainer  : bartus <arch-user-repo(at)bartus.33mail.com>
 # Contributor : Johannes Sauer <joh.sauer(at)gmail(dot)com>
 # Contributor : Danilo Bargen <aur at dbrgn dot ch>
+# Contributor : Sylvain Poulain <sylvain.poulain at giscan dot com>
 # shellcheck disable=SC2034,SC2154 # allow unused/uninitialized variables.
 
 ## Configuration env vars:
@@ -11,7 +12,8 @@ _fragment=#${FRAGMENT:-branch=master}
 
 name=cloudcompare
 #_fragment="#branch="
-options=('!strip') # strip would also remove plugins, for some reason
+#options=('!strip') # strip would also remove plugins, for some reason
+options=('!strip' '!lto')
 pkgname=${name}-git
 pkgver=2.13.1.r285.gbb5ef778f
 pkgrel=1
@@ -24,6 +26,7 @@ depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'mpir' 'pcl' 'pdal' 'l
 depends+=(openmpi)
 depends+=(nlohmann-json fmt jsoncpp)
 depends+=(utf8cpp fast_float)
+optdepends=('quazip-qt6')
 makedepends=('clang' 'cmake' 'doxygen' 'git' 'laz-perf' 'libharu' 'ninja' 'proj' 'python')
 conflicts=('cloudcompare')
 provides=('cloudcompare')
@@ -128,8 +131,6 @@ build() {
         -DEIGEN_ROOT_DIR=/usr/include/eigen3
         -DJsonCpp_INCLUDE_DIR=/usr/include
         -DJsonCpp_LIBRARY=/usr/lib
-        
-        
   )
   msg2 "Build Cork lib"
   make -C "${srcdir}/${name}-cork" CXXFLAGS="$CXXFLAGS -DSUPPORT_TOPO_STREAM_OPERATORS"
