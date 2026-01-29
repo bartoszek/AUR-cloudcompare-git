@@ -11,9 +11,9 @@ _fragment=#${FRAGMENT:-branch=master}
 
 name=cloudcompare
 #_fragment="#branch="
-options=('!strip') # strip would also remove plugins, for some reason
+options=('!strip' '!lto')
 pkgname=${name}-git
-pkgver=2.13.1.r285.gbb5ef778f
+pkgver=2.13.1.r294.g114907f8a
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
@@ -25,6 +25,7 @@ depends+=(openmpi)
 depends+=(nlohmann-json fmt jsoncpp)
 depends+=(utf8cpp fast_float)
 makedepends=('clang' 'cmake' 'doxygen' 'git' 'laz-perf' 'libharu' 'ninja' 'proj' 'python')
+optdepends=('quazip-qt6')
 conflicts=('cloudcompare')
 provides=('cloudcompare')
 source=("${name}::git+https://github.com/CloudCompare/CloudCompare.git${_fragment}"
@@ -64,6 +65,9 @@ prepare() {
 
 build() {
   export CCACHE_BASEDIR="$srcdir"
+  export CFLAGS="${CFLAGS} -fno-lto" 
+  export CXXFLAGS="${CXXFLAGS} -fno-lto"
+  export LDFLAGS="${LDFLAGS} -fno-lto" 
 # shellcheck disable=SC2191
   CMAKE_FLAGS+=(
         -Wno-dev
