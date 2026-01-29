@@ -2,7 +2,6 @@
 # Maintainer  : bartus <arch-user-repo(at)bartus.33mail.com>
 # Contributor : Johannes Sauer <joh.sauer(at)gmail(dot)com>
 # Contributor : Danilo Bargen <aur at dbrgn dot ch>
-# Contributor : Sylvain Poulain <sylvain.poulain at giscan dot com>
 # shellcheck disable=SC2034,SC2154 # allow unused/uninitialized variables.
 
 ## Configuration env vars:
@@ -12,10 +11,9 @@ _fragment=#${FRAGMENT:-branch=master}
 
 name=cloudcompare
 #_fragment="#branch="
-#options=('!strip') # strip would also remove plugins, for some reason
 options=('!strip' '!lto')
 pkgname=${name}-git
-pkgver=2.13.1.r285.gbb5ef778f
+pkgver=2.13.1.r294.g114907f8a
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
@@ -26,8 +24,8 @@ depends=('cgal' 'fbx-sdk' 'ffmpeg4.4' 'glew' 'glu' 'mesa' 'mpir' 'pcl' 'pdal' 'l
 depends+=(openmpi)
 depends+=(nlohmann-json fmt jsoncpp)
 depends+=(utf8cpp fast_float)
-optdepends=('quazip-qt6')
 makedepends=('clang' 'cmake' 'doxygen' 'git' 'laz-perf' 'libharu' 'ninja' 'proj' 'python')
+optdepends=('quazip-qt6')
 conflicts=('cloudcompare')
 provides=('cloudcompare')
 source=("${name}::git+https://github.com/CloudCompare/CloudCompare.git${_fragment}"
@@ -67,6 +65,9 @@ prepare() {
 
 build() {
   export CCACHE_BASEDIR="$srcdir"
+  export CFLAGS="${CFLAGS} -fno-lto" 
+  export CXXFLAGS="${CXXFLAGS} -fno-lto"
+  export LDFLAGS="${LDFLAGS} -fno-lto" 
 # shellcheck disable=SC2191
   CMAKE_FLAGS+=(
         -Wno-dev
@@ -131,6 +132,8 @@ build() {
         -DEIGEN_ROOT_DIR=/usr/include/eigen3
         -DJsonCpp_INCLUDE_DIR=/usr/include
         -DJsonCpp_LIBRARY=/usr/lib
+        
+        
   )
   msg2 "Build Cork lib"
   make -C "${srcdir}/${name}-cork" CXXFLAGS="$CXXFLAGS -DSUPPORT_TOPO_STREAM_OPERATORS"
