@@ -13,7 +13,7 @@ name=cloudcompare
 #_fragment="#branch="
 options=('!strip') # strip would also remove plugins, for some reason
 pkgname=${name}-git
-pkgver=2.13.1.r327.g5170325e3
+pkgver=2.13.1.r370.g114687375
 pkgrel=1
 pkgdesc="A 3D point cloud (and triangular mesh) processing software"
 arch=('i686' 'x86_64')
@@ -37,6 +37,7 @@ sha256sums=('SKIP'
             'SKIP'
             '14096df9cf7aca3099d5df1585d1cf669544e9b10754dce3d2507100dd7034fe'
             '821ac2540e1196774e26f8033946ce7b36223dae7a2a7c78f4a901b4177f68cc'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -163,7 +164,7 @@ prepare_submodule() {
   git -C "$srcdir/cloudcompare" config submodule.extern/CCCoreLib.url "$srcdir/CCCoreLib"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qPoissonRecon/extern/PoissonRecon.url "$srcdir/PoissonRecon"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMPlane.url "$srcdir/mplane-plugin"
-  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qColorimetricSegmenter.url "$srcdir/ptrans"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qColorimetricSegmenter.url "$srcdir/qColorimetricSegmenter"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qMasonry.url "$srcdir/masonry-cc"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qJSonRPCPlugin.url "$srcdir/qJSonRPCPlugin"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qCanupo/contrib/dlib.url "$srcdir/dlib"
@@ -173,6 +174,7 @@ prepare_submodule() {
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qVoxFall.url "$srcdir/qVoxFall"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/Standard/qG3Point.url "$srcdir/qG3Point"
   git -C "$srcdir/cloudcompare" config submodule.plugins/core/IO/qPhotoscanIO/extern/quazip.url "$srcdir/quazip"
+  git -C "$srcdir/cloudcompare" config submodule.plugins/core/IO/MeshIO.url "$srcdir/MeshIO"
   git -C "$srcdir/cloudcompare" -c protocol.file.allow=always submodule update --init
   git -C "$srcdir/cloudcompare/libs/qCC_db/extern/CCCoreLib/" config submodule.extern/nanoflann.url "$srcdir/nanoflann"
   git -C "$srcdir/cloudcompare/plugins/core/IO/qE57IO/extern/libE57Format/test/extern/googletest" config submodule.test/extern/googletest.url "$srcdir/googletest"
@@ -184,7 +186,7 @@ source+=(
   "CCCoreLib::git+https://github.com/CloudCompare/CCCoreLib"
   "PoissonRecon::git+https://github.com/cloudcompare/PoissonRecon"
   "mplane-plugin::git+https://github.com/hvs-ait/mplane-plugin"
-  "ptrans::git+https://gitlab.univ-nantes.fr/E164955Z/ptrans"
+  "qColorimetricSegmenter::git+https://github.com/CloudCompare/qColorimetricSegmenter"
   "masonry-cc::git+https://github.com/CyberbuildLab/masonry-cc"
   "qJSonRPCPlugin::git+https://github.com/CloudCompare/qJSonRPCPlugin"
   "dlib::git+https://github.com/davisking/dlib"
@@ -194,6 +196,7 @@ source+=(
   "qVoxFall::git+https://github.com/farmakis/qVoxFall"
   "qG3Point::git+https://github.com/p-leroy/qG3Point"
   "quazip::git+https://github.com/stachenov/quazip"
+  "MeshIO::git+https://github.com/CloudCompare/MeshIO"
   "googletest::git+https://github.com/google/googletest"
 )
 
